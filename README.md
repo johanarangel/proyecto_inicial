@@ -5,7 +5,7 @@ johanarang@hotmail.com\
 Primer proyecto integrador.
 
 # Nombre del proyecto.
-Verificación de permisos de circulación.
+Verificación de permisos de circulación provincial.
 
 # Descripción. 
 Es un programa que permite la verificación de perimisos de circulación para el ingreso a provincia. 
