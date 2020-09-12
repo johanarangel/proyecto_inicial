@@ -21,6 +21,6 @@ Acción 2: datos a validar (este dato será el código de circulación emitido p
 Ejemplos.
 
 # Fecha de última actualización.
-10 de septiembre 2020
+12 de septiembre 2020
 
 
