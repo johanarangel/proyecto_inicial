@@ -11,11 +11,13 @@ Verificación de permisos de circulación provincial.
 
 # Descripción. 
 Es un programa que permite la verificación de perimisos de circulación para el ingreso a provincia. 
-Está realizado con el lenguaje de programación Python. Funciona con un menu que tiene dos acciones a realizar:
+Está realizado con el lenguaje de programación Python. Funciona con un menu que tiene tres acciones a realizar:
 
 Acción 1: validación de la empresa, donde permite ingresar el nombre de ésta, la actividad, también los datos del empleado; nombre, apellido, DNI y código de circulación obtenido (información almacenada en un archivo CSV)
 
 Acción 2: datos a validar (este dato será el código de circulación emitido por la provincia de destino), luego el proceso consiste en verificar en la base de datos anterior si ingresa o no, mostrando por pantalla la información. En caso ingrese, la información queda asentada en un segundo archivo CSV.
+
+Acción 3: salir del programa
 
 # Diagrama de flujo.
 ![Johana Rangel banner](/flujo_proyecto_inicial.jpg)
@@ -82,6 +84,6 @@ def ingresa():
 Cualquier duda o sugerencia pueden contartarse con Johana Rangel al mail johanarang@hotmail.com 
 
 # Fecha de última actualización.
-12 de septiembre 2020
+13 de septiembre 2020
 
 
