@@ -16,7 +16,7 @@ Si por error uno comienza a crear un nuevo registro o entrada, el menu de ingres
 #### validar_ingreso.py
 Si por error la primera vez que se ejecuta el programa (sin ningún CSV creado) uno entra al menú "2" de validar ingreso, el sistema explota porque intenta abrir el archivo CSV que no existe aún (validacionempresas.csv). Faltaría comtemplar ese caso.
 
-#### Comentarios
+## Comentarios generales
 - El proyecto alcanza los conceptos vistos en la cursada, excelente el uso de funciones y archivos.
 - Destaco el diseño del proyecto, muy bien resuelto y encarado lo cual se ve reflejado en la prolijidad y lectura del código.
 - Muy pero muy bien realizado el readme, de los mejores realizados este año. En cuanto entre a ver el proyecto me dieron ganas de ver de que se trataba.
