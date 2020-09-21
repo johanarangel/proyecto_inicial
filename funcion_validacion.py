@@ -3,7 +3,7 @@
 Página principal [Proyecto Inicial Python]
 ---------------------------
 Autor: Johana Rangel
-Version: 0.4
+Version: 0.5
 
 Descripcion:
 Programa creado para validar permisos de circulación provincial.
@@ -11,11 +11,12 @@ Programa creado para validar permisos de circulación provincial.
 
 __author__ = "Johana Rangel"
 __email__ = "johanarang@hotmail.com"
-__version__ = "0.4"
+__version__ = "0.5"
 
 import csv
 import os
 import re
+import principal
 
 
 def validacion():
@@ -44,40 +45,70 @@ def validacion():
 
         try:
             dni = int(input('Ingrese número de "DNI": \n Ingrese 3, para salir\n'))
-        
+            if dni == 3:
+                print('Ha salido de la validación por empresa')
+                consulta = int(input('Ingrese 1, para "VALIDACIÓN DE LA EMPRESA": \nIngrese 2, para "VALIDAR DATOS": \nIngrese 3, para "SALIR"\n'))
+                principal.menu(consulta)
+
         except:
             print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
             dni = int(input('Ingrese número de "DNI": \n Ingrese 3, para salir\n'))
 
+
         try:
             nombre_empresa =  str(input('Ingrese "NOMBRE DE LA EMPRESA": \n Ingrese "FIN", para salir\n'))
-        
+            if nombre_empresa == 'FIN':
+                print('Ha salido de la validación por empresa')
+                consulta = int(input('Ingrese 1, para "VALIDACIÓN DE LA EMPRESA": \nIngrese 2, para "VALIDAR DATOS": \nIngrese 3, para "SALIR"\n'))
+                principal.menu(consulta)
+
+
         except:    
             print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
             nombre_empresa =  str(input('Ingrese "NOMBRE DE LA EMPRESA": \n Ingrese "FIN", para salir\n'))
 
-        try:
-            actividad = str(input('Ingrese "ACTIVIDAD": \n Ingese "FIN", para salir\n'))
         
+        try:
+            actividad = str(input('Ingrese "ACTIVIDAD": \n Ingrese "FIN", para salir\n'))
+        
+            if actividad == 'FIN':
+                print('Ha salido de la validación por empresa')
+                consulta = int(input('Ingrese 1, para "VALIDACIÓN DE LA EMPRESA": \nIngrese 2, para "VALIDAR DATOS": \nIngrese 3, para "SALIR"\n'))
+                principal.menu(consulta)
+
         except:
             print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
-            actividad = str(input('Ingrese "ACTIVIDAD": \n Ingese "FIN", para salir\n'))
-            
+            actividad = str(input('Ingrese "ACTIVIDAD": \n Ingrese "FIN", para salir\n'))
+
+       
         try:
             nombre_empleado = str(input('Ingrese "NOMBRE DEL EMPLEADO": \n Ingrese "FIN", para salir\n'))
         
+            if nombre_empleado == 'FIN':
+                print('Ha salido de la validación por empresa')
+                consulta = int(input('Ingrese 1, para "VALIDACIÓN DE LA EMPRESA": \nIngrese 2, para "VALIDAR DATOS": \nIngrese 3, para "SALIR"\n'))
+                principal.menu(consulta)
+
+        
         except:
             print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
             nombre_empleado = str(input('Ingrese "NOMBRE DEL EMPLEADO": \n Ingrese "FIN", para salir\n'))
         
+       
         try:    
             apellido_empleado = str(input('Ingrese "APELLIDO DEL EMPLEADO": \n Ingrese "FIN", para salir\n'))
-        
+
+            if apellido_empleado == 'FIN':
+                print('Ha salido de la validación por empresa')
+                consulta = int(input('Ingrese 1, para "VALIDACIÓN DE LA EMPRESA": \nIngrese 2, para "VALIDAR DATOS": \nIngrese 3, para "SALIR"\n'))
+                principal.menu(consulta)
+
+
         except:
             print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
             apellido_empleado = str(input('Ingrese "APELLIDO DEL EMPLEADO": \n Ingrese "FIN", para salir\n'))
 
-        
+               
         if codigo != 3: 
               
             file_exists = os.path.isfile('validacionempresas.csv')
@@ -125,8 +156,7 @@ def validacion():
             
                 print('Ha salido del programa.') #Condición para permitir salir del programa
                 break
-            
-            
+                 
 
 if __name__ == '__main__':
     

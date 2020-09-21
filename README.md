@@ -84,6 +84,6 @@ def ingresa():
 Cualquier duda o sugerencia pueden contartarse con Johana Rangel al mail johanarang@hotmail.com 
 
 # Fecha de última actualización.
-13 de septiembre 2020
+20 de septiembre 2020
 
 

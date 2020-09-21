@@ -3,7 +3,7 @@
 Página principal [Proyecto Inicial Python]
 ---------------------------
 Autor: Johana Rangel
-Version: 0.4
+Version: 0.5
 
 Descripcion:
 Programa creado para validar los permisos de circulación provincial.
@@ -11,7 +11,7 @@ Programa creado para validar los permisos de circulación provincial.
 
 __author__ = "Johana Rangel"
 __email__ = "johanarang@hotmail.com"
-__version__ = "0.4"
+__version__ = "0.5"
 
 import csv
 import os
@@ -19,21 +19,14 @@ import re
 import funcion_validacion
 import validar_ingreso
 
+
 '''
 El programa cuenta inicialmente con un menu con las acciones a realizar (para validacion de 
 la empresa, validar datos en los puntos de control y para salir del programa), cada opción
 del menu es entera, quedando almacenada la opcion en la variable consulta, variable que se pasa 
 por parámetro en la función menu.
 ''' 
-#Atrapando excepción para validación de formato de entrada de datos para la variable consulta.
-
-try:
-    consulta = int(input('Ingrese 1, para "VALIDACIÓN DE LA EMPRESA": \nIngrese 2, para "VALIDAR DATOS": \nIngrese 3, para "SALIR"\n'))
-
-except:
-    print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
-    consulta = int(input('Ingrese 1, para "VALIDACIÓN DE LA EMPRESA": \nIngrese 2, para "VALIDAR DATOS": \nIngrese 3, para "SALIR"\n'))
-
+ 
 def menu(consulta):
     
     if consulta == 1:
@@ -85,6 +78,14 @@ def menu(consulta):
 if __name__ == '__main__':
     
     print('Bienvenido al programa de verificación de permiso provincial')
+    
+    try:
+        consulta = int(input('Ingrese 1, para "VALIDACIÓN DE LA EMPRESA": \nIngrese 2, para "VALIDAR DATOS": \nIngrese 3, para "SALIR"\n'))
+
+    except:
+        print('El valor indicado no corresponde con lo indicado. Intente nuevamente.')
+        consulta = int(input('Ingrese 1, para "VALIDACIÓN DE LA EMPRESA": \nIngrese 2, para "VALIDAR DATOS": \nIngrese 3, para "SALIR"\n'))
+    
     menu(consulta)
     
 

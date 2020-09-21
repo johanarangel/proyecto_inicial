@@ -3,7 +3,7 @@
 Página principal [Proyecto Inicial Python]
 ---------------------------
 Autor: Johana Rangel
-Version: 0.4
+Version: 0.5
 
 Descripcion:
 Programa creado para validar permisos de circulación provincial.
@@ -11,11 +11,12 @@ Programa creado para validar permisos de circulación provincial.
 
 __author__ = "Johana Rangel"
 __email__ = "johanarang@hotmail.com"
-__version__ = "0.4"
+__version__ = "0.5"
 
 import csv
 import os
 import re
+import principal
 
 def ingresa():
 
@@ -39,51 +40,61 @@ def ingresa():
         Luego se crea una variable llamada "cantidad_filas" que es 
         igual a la longitud de la la data.
         '''
-
         persona_ingresada = [] #Variable que almacenará los datos de la persona que tenga permiso de ingreso provincial.
+
+        file_exists = os.path.isfile('validacionempresas.csv') #Se verifica si existe el archivo
         
-        with open('validacionempresas.csv') as csvfile:
-            data = list(csv.DictReader(csvfile))
-            cantidad_filas = len(data)
+        if file_exists: #En caso exista procede a validar el codigo ingresado
 
-        #Luego con el bucle for se recorre el range cantidad de filas
-        # Para poder extraer la información de cada columna.                                    
-            
-            for i in range(cantidad_filas):
-                row = data[i]
-                codigos = int(row.get('Codigo'))
-                dni = int(row.get('DNI'))
-                nombre_empresa = str(row.get('Nombre empresa'))
-                actividad = str(row.get('Actividad'))
-                nombre_empleado = str(row.get('Nombre empleado'))
-                apellido_empleado = str(row.get('Apellido empleado'))
+            with open('validacionempresas.csv') as csvfile:
+                data = list(csv.DictReader(csvfile))
+                cantidad_filas = len(data)
 
-                #Luego considerando el valor del código ingresado para validar, 
-                #se forma una condición para buscarlo en la lista contenida
-                #por la varible "codigos", en caso sean iguales, se van agregando
-                #los demás datos que le acompañan como el dni, nombre_empresa,
-                #actividad, nombre_empleado y apellido_empleado en una lista 
-                #llamada "persona_ingresada"
-                #Con la lista persona_ingresada se arma otra condición para
-                #imprimir por pantalla si tiene o no acceso provincial.
-
-                if codigos == codigo:
-                    persona_ingresada.append(codigo)
-                    persona_ingresada.append(dni)    
-                    persona_ingresada.append(nombre_empresa)
-                    persona_ingresada.append(actividad)
-                    persona_ingresada.append(nombre_empleado)
-                    persona_ingresada.append(apellido_empleado)
+            #Luego con el bucle for se recorre el range cantidad de filas
+            # Para poder extraer la información de cada columna.                                    
                 
-                                 
-            if codigo in persona_ingresada:
-                print('Código está registrado, está validado el ingreso provincial')
-                print('Los datos encontrados de acuerdo al código:', codigo, '\n DNI:', dni, '\n Nombre empresa:', nombre_empresa, '\n Actividad:', actividad, '\n Nombre empleado:', nombre_empleado, '\n Apellido empleado:', apellido_empleado)
+                for i in range(cantidad_filas):
+                    row = data[i]
+                    codigos = int(row.get('Codigo'))
+                    dni = int(row.get('DNI'))
+                    nombre_empresa = str(row.get('Nombre empresa'))
+                    actividad = str(row.get('Actividad'))
+                    nombre_empleado = str(row.get('Nombre empleado'))
+                    apellido_empleado = str(row.get('Apellido empleado'))
+
+                    #Luego considerando el valor del código ingresado para validar, 
+                    #se forma una condición para buscarlo en la lista contenida
+                    #por la varible "codigos", en caso sean iguales, se van agregando
+                    #los demás datos que le acompañan como el dni, nombre_empresa,
+                    #actividad, nombre_empleado y apellido_empleado en una lista 
+                    #llamada "persona_ingresada"
+                    #Con la lista persona_ingresada se arma otra condición para
+                    #imprimir por pantalla si tiene o no acceso provincial.
+
+                    if codigos == codigo:
+                        persona_ingresada.append(codigo)
+                        persona_ingresada.append(dni)    
+                        persona_ingresada.append(nombre_empresa)
+                        persona_ingresada.append(actividad)
+                        persona_ingresada.append(nombre_empleado)
+                        persona_ingresada.append(apellido_empleado)
                     
-            else:
-                print('El código ingresado no se encuenta registrado, acceso denegado')
+                                    
+                if codigo in persona_ingresada:
+                    print('Código está registrado, está validado el ingreso provincial')
+                    print('Los datos encontrados de acuerdo al código:', codigo, '\n DNI:', dni, '\n Nombre empresa:', nombre_empresa, '\n Actividad:', actividad, '\n Nombre empleado:', nombre_empleado, '\n Apellido empleado:', apellido_empleado)
+                        
+                else:
+                    print('El código ingresado no se encuenta registrado, acceso denegado')
             
-        csvfile.close()
+            csvfile.close()
+
+        elif not file_exists: #En caso no exista informa que no hay registro alguno y vuelve a consultar.
+            
+            print('No se puede validar los datos ingresados,porque no existe registro alguno')
+            consulta = int(input('Ingrese 1, para "VALIDACIÓN DE LA EMPRESA": \nIngrese 2, para "VALIDAR DATOS": \nIngrese 3, para "SALIR"\n'))
+            
+            principal.menu(consulta)
 
         '''
         En esta parte, el código que se muestra es para saber si existe un segundo archivo csv
@@ -111,7 +122,7 @@ def ingresa():
                     writer.writerow({'Codigo': codigo, 'DNI': dni, 'Nombre empresa': nombre_empresa, 'Actividad': actividad, 'Nombre empleado': nombre_empleado, 'Apellido empleado': apellido_empleado})
                     codigo = int(input('Validar otro dato, ingrese "CÓDIGO DE CIRCULACIÓN":\n Ingrese 3, para salir\n'))        
                         
-                fd.close() 
+            fd.close() 
 
         #En caso, exista el archivo, agregar filas.
 
@@ -136,11 +147,9 @@ def ingresa():
                     codigo = int(input('Validar otro dato, ingrese "CÓDIGO DE CIRCULACIÓN":\n Ingrese 3, para salir\n'))  
            
             fd.close()
-        
-        csvfile.close()
 
     elif codigo == 3:
-            print('Ha salido del programa') #Si el código es igual a tres sale del programa.
+        print('Ha salido del programa') #Si el código es igual a tres sale del programa.
                            
     else:
 
