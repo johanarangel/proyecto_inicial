@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS  validacion;
 
 CREATE TABLE validacion (
-    [codigo de circulación] INTEGER PRIMARY KEY,
-    [nombre empresa] STRING  NOT NULL,
+    [codigo] INTEGER PRIMARY KEY,
+    [empresa] STRING  NOT NULL,
     [actividad] STRING NOT NULL,
-    [nombre] STRING, 
-    [apellido] STRING,
+    [nombre] STRING NOT NULL, 
+    [apellido] STRING NOT NULL,
     [dni] INTEGER  NOT NULL
 ); 

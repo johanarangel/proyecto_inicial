@@ -53,9 +53,36 @@ def insert(codigo, empresa, actividad, nombre, apellido, dni):
     values = [codigo, empresa, actividad, nombre, apellido, dni]
 
     c.execute("""
-        INSERT INTO heartrate (codigo, empresa, actividad, nombre, apellido, dni)
-        VALUES (?,?,?);""", values)
+        INSERT INTO validacion (codigo, empresa, actividad, nombre, apellido, dni)
+        VALUES (?,?,?,?,?,?);""", values)
 
     conn.commit()
     # Cerrar la conexión con la base de datos
     conn.close()
+
+def consulta(codigo):
+    
+    conn = sqlite3.connect(db['database'])
+    c = conn.cursor()
+
+    c.execute("""SELECT codigo, empresa, actividad, nombre, apellido, dni 
+                FROM validacion 
+                WHERE codigo = ?;""", (codigo,))
+    
+    query_results = c.fetchall()
+
+    conn.commit()
+    # Cerrar la conexión con la base de datos
+    conn.close()
+
+    codigo = [x[0] for x in query_results]
+    empresa = [x[1] for x in query_results]
+    actividad = [x[2] for x in query_results]
+    nombre = [x[3] for x in query_results]
+    apellido = [x[4] for x in query_results]
+    dni = [x[5] for x in query_results]
+    
+    return codigo, empresa, actividad, nombre, apellido, dni
+
+   
+

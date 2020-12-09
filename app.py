@@ -61,12 +61,13 @@ def index():
         result = "<h1>Bienvenido!!</h1>"
         result += "<h2>Endpoints disponibles:</h2>"
         result += "<h3>[GET] /reset --> borrar y crear la base de datos</h3>"
-        #result += "<h3>[GET] /pulsaciones?limit=[]&offset=[] --> mostrar últimas pulsaciones registradas (limite and offset are optional)</h3>"
+        result += "<h3>[GET] /menu.html --> HTML de bienvenida con las acciones a realizar</h3>"
+        result += "<h3>[GET] /empresa.html --> muestra el HTML con el formulario de registro</h3>"
+        result += "<h3>[POST] /procesar --> ingreso del registro en la base de datos</h3>"
+        result += "<h3>[GET] /validar_datos.html --> muestra el HTML de consulta de código en la base de datos</h3>"
+        result += "<h3>[GET] /resultado_consulta --> muetra el resultado de la búsqueda por código</h3>"
         #result += "<h3>[GET] /pulsaciones/tabla?limit=[]&offset=[] --> mostrar últimas pulsaciones registradas (limite and offset are optional)</h3>"
         #result += "<h3>[GET] /pulsaciones/{name}/historico --> mostrar el histórico de pulsaciones de una persona</h3>"
-        result += "<h3>[GET] /registro --> HTML con el formulario de registro de pulsaciones</h3>"
-        result += "<h3>[POST] /registro --> ingresar nuevo registro de pulsaciones por JSON</h3>"
-        result += "<h3>[GET] /entrada --> HTML de bienvenida con las acciones a realizar</h3>"
         #result += "<h3>[POST] /login --> ingresar el nombre de usuario por JSON</h3>"
         #result += "<h3>[GET] /logout --> Terminar la sesion</h3>"
 
@@ -79,22 +80,21 @@ def reset():
     try:
         # Borrar y crear la base de datos
         empresa_valida.create_schema()
-        result = "<h3>Base de datos re-generada!</h3>"
-        return (result)
+        return render_template('reset.html')
     except:
         return jsonify({'trace': traceback.format_exc()})
 
-@app.route("/entrada")
-def entrada():
+@app.route("/menu.html")
+def menu():
     try:
         # Imprimir los distintos endopoints disponibles
         return render_template('menu.html')
     except:
         return jsonify({'trace': traceback.format_exc()})
 
-@app.route("/registro", methods=['GET', 'POST'])
-def registro():
 
+@app.route("/empresa.html", methods= ['GET'])  #Debo colocar el nombre del archivo html para que funcionen los botones.
+def registro_empresa():
     if request.method == 'GET':
         try:
             # Imprimir los distintos endopoints disponibles
@@ -102,11 +102,15 @@ def registro():
         except:
             return jsonify({'trace': traceback.format_exc()})
 
+
+@app.route('/procesar', methods=['POST'])
+def procesar():
+    
     if request.method == 'POST':
         try:
             # Obtener del HTTP POST JSON de los datos registrados por la empresa
-            codigo = str(request.form.get('codigo de circulación'))
-            empresa= str(request.form.get('nombre empresa'))
+            codigo = str(request.form.get('codigo'))
+            empresa= str(request.form.get('empresa'))
             actividad = str(request.form.get('actividad'))
             nombre = str(request.form.get('nombre'))
             apellido = str(request.form.get(' apellido'))
@@ -118,9 +122,34 @@ def registro():
                     return Response(status=400)
 
             empresa_valida.insert(int(codigo), empresa, actividad, nombre, apellido, int(dni))
+            return render_template('procesado.html')
 
         except:
             return jsonify({'trace': traceback.format_exc()})
+
+@app.route("/validar_datos.html", methods= ['GET'])
+def validar_datos():
+    try:
+        # Imprimir los distintos endopoints disponibles
+        return render_template('validar_datos.html')
+    except:
+        return jsonify({'trace': traceback.format_exc()})
+
+
+@app.route("/consulta", methods= ['POST'])
+def consulta():
+
+    if request.method == 'POST':
+        try:
+            # Imprimir los distintos endopoints disponibles
+            codigo = str(request.form.get('codigo'))
+            codigo, empresa, actividad, nombre, apellido, dni = empresa_valida.consulta(int(codigo))
+
+            return render_template('consulta.html', codigo=codigo, empresa=empresa, actividad=actividad, nombre=nombre, apellido=apellido, dni=dni)
+
+        except:
+            return jsonify({'trace': traceback.format_exc()})
+
 
 if __name__ == '__main__':
     print('Proyecto desarrollador python!')
