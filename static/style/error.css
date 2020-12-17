@@ -74,7 +74,7 @@ h3{
 /*Para separar el icono de la palabra*/
 .button span{
 
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 /*Para agregar color y sobra*/
@@ -101,6 +101,17 @@ h3{
     box-shadow: 0px 0px 0px;   /*Para que desaparezcan las sombras*/
     padding-top: 7px; /*Este efecto agranda y va al final de construir los botones y es menor al padding del button */
 
+}
+
+div, h2{
+
+    background: rgb(236, 234, 234);
+    width: 500px;
+    height: 70px;
+    color: black;
+    margin: 20px 50px;
+    box-shadow: 0px 3px 0px #373c3c;   
+   
 }
 
 .button.brown{

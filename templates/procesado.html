@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/menu.css') }}">
     <link rel="stylesheet" href="../static/style/menu.css" type="text/css">
 
+    <link rel="shortcut icon" href="{{url_for('static', filename='media/logo_permiso.ico')}}">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style/fonts/style.css') }}">
     <link rel="stylesheet" href="../static/style/fonts/style.css" type="text/css">
     <title>Proyecto Desarrollador Python</title>
@@ -13,11 +15,56 @@
 <body>
 
     <h1>Operación realizada<span class="icon-attachment" style="font-size: 200%; color: black;"></span></h1>
-    <h2>Registro completado! FALTA TABLA DE LA BBDD<span class="icon-open-thumbs-up" style="font-size: 300%; color:  hsl(256, 99%, 44%);"></span></h2>
-    <h2><span class="icon-info" style="font-size: 150%; color: black;"></span>Haga click en inicio para continuar con las acciones a realizar.</h2>
+    <h2>Registro completado! <span class="icon-database" style="font-size: 300%; color:  hsl(256, 99%, 44%);"></span></h2>
 
     <center>
-        <a href="menu.html" class= "button medium radius"><span class="icon-home"></span>Inicio</a> 
+
+        <center><div class="container my-5 text-center">
+            <div class="mt-5"></center>
+            
+                <center>
+                    <table border="1" cellpadding="0" cellspacing="1" bordercolor="cyan" style="border-collapse:collapse;border-color:rgb(12, 12, 12);">
+                    <thead>
+                        <tr>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Empresa</th>
+                            <th scope="col">Actividad</th>
+                            <th scope="col">Nombre y Apellido</th>
+                            <th scope="col">Edad</th>
+                            <th scope="col">DNI</th>
+                            <th scope="col">Fecha de Permiso</th>
+                            <th scope="col">Persona de Riesgo</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{datos['codigo']}}</th>
+                            <td scope="row">{{datos['empresa']}}</td>
+                            <td scope="row">{{datos['actividad']}}</td>
+                            <td scope="row">{{datos['nombre']}}</td>
+                            <td scope="row">{{datos['edad']}}</td>
+                            <td scope="row">{{datos['dni']}}</td>
+                            <td scope="row">{{datos['fecha_permiso']}}</td>
+                            <td scope="row">{{datos['riesgo']}}</td>
+                        </tr>
+
+                    </tbody>
+                    </table>
+                </center>
+
+            </div>
+
+            <div class="grafico" id='div_image'>
+                <!-- Acá aparecerá el gráfico del a persona solicitada -->
+            </div>
+        
+        <h2><span class="icon-info" style="font-size: 150%; color: black;"></span>click en inicio para volver a las acciones a realizar.</h2>
+        <h2><span class="icon-info" style="font-size: 150%; color: black;"></span>click Validación empresa para validar a otro empleado.</h2>
+              
+        <a href="menu.html" class= "button medium radius"><span class="icon-home"></span>Inicio</a>
+        <a href="empresa.html" class= "button blue medium radius"><span class="icon-add-user"></span>Validación de la empresa</a> 
+        <a href="salida.html" class= "button medium radius brown"><span class="icon-arrow-right"></span>Salir del sistema</a>
     </center>
 
     <footer class="pie">
